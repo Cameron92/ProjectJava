@@ -1,5 +1,3 @@
-package prog24178;
-
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
