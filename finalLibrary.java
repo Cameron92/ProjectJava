@@ -1,9 +1,15 @@
 import javax.swing.*;
+import java.awt.Container;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
-import java.awt.event.KeyListener;
-import java.awt.*;
-import java.awt.event.*;
 import javax.swing.border.TitledBorder;
+
 public class finalLibrary extends JFrame {
 	public finalLibrary() {
 		getContentPane().setLayout(null);
@@ -54,31 +60,31 @@ public class finalLibrary extends JFrame {
 		getContentPane().add(genreP);
 		genreP.setLayout(null);
 		
-		JCheckBox chkSci = new JCheckBox("Sci - Fi");
+		final JCheckBox chkSci = new JCheckBox("Sci - Fi");
 		chkSci.setBounds(23, 22, 97, 23);
 		genreP.add(chkSci);
 		
-		JCheckBox chkFant = new JCheckBox("Fantasy");
+		final JCheckBox chkFant = new JCheckBox("Fantasy");
 		chkFant.setBounds(23, 48, 97, 23);
 		genreP.add(chkFant);
 		
-		JCheckBox chkRomance = new JCheckBox("Romance");
+		final JCheckBox chkRomance = new JCheckBox("Romance");
 		chkRomance.setBounds(23, 74, 97, 23);
 		genreP.add(chkRomance);
 		
-		JCheckBox chkAction = new JCheckBox("Action");
+		final JCheckBox chkAction = new JCheckBox("Action");
 		chkAction.setBounds(23, 100, 97, 23);
 		genreP.add(chkAction);
 		
-		JCheckBox chkThriller = new JCheckBox("Thriller");
+		final JCheckBox chkThriller = new JCheckBox("Thriller");
 		chkThriller.setBounds(23, 126, 97, 23);
 		genreP.add(chkThriller);
 		
-		JCheckBox chkHorror = new JCheckBox("Horror");
+		final JCheckBox chkHorror = new JCheckBox("Horror");
 		chkHorror.setBounds(23, 152, 97, 23);
 		genreP.add(chkHorror);
 		
-		JSlider sRating = new JSlider();
+		final JSlider sRating = new JSlider();
 		sRating.setBounds(118, 280, 200, 26);
 		getContentPane().add(sRating);
 		
@@ -97,6 +103,14 @@ public class finalLibrary extends JFrame {
 		JButton btnSave = new JButton("Save Book");
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				PrintWriter fileWriter = null;
+				try {
+					fileWriter = new PrintWriter(new BufferedWriter(new FileWriter("database.dat", true)));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				fileWriter.println( txtTitle.getText()+","+txtaName.getText()+","+txtISBN.getText()+","+txtDate.getText()+","+String.valueOf(chkSci.isSelected())+","+String.valueOf(chkFant.isSelected())+","+String.valueOf(chkRomance.isSelected())+","+String.valueOf(chkAction.isSelected())+","+String.valueOf(chkThriller.isSelected())+","+String.valueOf(chkHorror.isSelected())+","+sRating.getValue());
+				fileWriter.close();
 			}
 		});
 		btnSave.setBounds(164, 317, 110, 23);

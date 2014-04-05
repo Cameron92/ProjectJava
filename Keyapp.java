@@ -1,12 +1,10 @@
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.JSlider;
 
-//hello
 public class Keyapp extends JFrame implements KeyListener{
 	Container c;
 	JTextField txt;
