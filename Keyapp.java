@@ -1,7 +1,3 @@
-//craig comment.
-//this is a comment.
-package prog24178;
-//this is a test
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -11,11 +7,11 @@ import java.awt.event.*;
 import javax.swing.JSlider;
 
 //hello
-public class KeyApp extends JFrame implements KeyListener{
+public class Keyapp extends JFrame implements KeyListener{
 	Container c;
 	JTextField txt;
 	
-	public KeyApp(){
+	public Keyapp(){
 		super ("Key Listener Example");
 		c = getContentPane();
 		getContentPane().setLayout(null);
@@ -32,7 +28,7 @@ public class KeyApp extends JFrame implements KeyListener{
 		
 	}
 	public static void main(String[] args) {
-		KeyApp app = new KeyApp();
+		Keyapp app = new Keyapp();
 		app.setSize(300, 200);
 		app.setVisible(true);
 		app.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
