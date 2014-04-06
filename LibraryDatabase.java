@@ -3,7 +3,6 @@ import javax.swing.border.TitledBorder;
 
 import java.util.*;
 import java.util.List;
-import java.util.regex.PatternSyntaxException;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
@@ -68,40 +67,33 @@ public class LibraryDatabase extends JFrame implements ActionListener{
 				Scanner scanner = null;
 				try {
 					scanner = new Scanner(new File ("database.dat"));
-				} catch (FileNotFoundException e1) {
+				}
+				catch (FileNotFoundException e1) {
 					e1.printStackTrace();
 				}	
-					// Open the file database.dat as a buffered reader
-					try {
-						BufferedReader bf = new BufferedReader(new FileReader("database.dat"));
-					} catch (FileNotFoundException e) {
-						e.printStackTrace();
-					}
-					
-					// Start a line count and declare a string to hold our current line.
-					int linecount = 0;
-					String line;
-					
-					// Let the user know what we are searching for
-					
-					 // Loop through each line, storing the line into our line variable.
-					 List<String> list=new ArrayList<>();
-					 StringBuilder buffer = new StringBuilder();
-					 while(scanner.hasNextLine()){
-					     list.add(scanner.nextLine());
-					     buffer.append(list);
-				         buffer.append('\n');
-					     String Buffer = buffer.toString(); 
-				    	 String[] splitArray = Buffer.split("\\s+");
-				    	 String search = txtSearchBy.getText();
-				    	 //TODO: cant seem to figure out why only 3 values are being found at the moment instead of 4
-					    	 for(int i = 0; i < splitArray.length; i++) {
-					    		 if(search.equals(splitArray[i])){
-							         System.out.println(buffer);
-					    		 }
-					    	 }
-					 }
-			}});
+				// Start a line count and declare a string to hold our current line.
+				int linecount = 0;
+				
+				 // Loop through each line, storing the line into our buffer. while incrementing linecount.
+				 List<String> list=new ArrayList<>();
+				 StringBuilder buffer = new StringBuilder();
+				 while(scanner.hasNextLine()){
+					 linecount++;
+				     list.add(scanner.nextLine());
+				     buffer.append(list);
+			         buffer.append('\n');
+				     String Buffer = buffer.toString(); 
+				     // cleaning up actual buffer output (removing square brackets)
+				     Buffer = Buffer.replaceAll("\\[", "").replaceAll("\\]","");
+			    	 String[] splitArray = Buffer.split("\\s+");
+			    	 String search = txtSearchBy.getText();
+			    	 for(int i = 0; i < splitArray.length; i++) {
+			    		 if(search.equals(splitArray[i])){
+					         System.out.println(Buffer);
+			    		 }
+			    	 }
+				 }
+		}});
 		
 	}
 
